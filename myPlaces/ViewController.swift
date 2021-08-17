@@ -28,8 +28,14 @@ class ViewController: UIViewController, UITableViewDelegate,UITableViewDataSourc
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         cell.textLabel?.text = restaurantNames[indexPath.row]
+        cell.imageView?.layer.cornerRadius = cell.frame.height/2
         cell.imageView?.image = UIImage(named: restaurantNames[indexPath.row])
+        cell.imageView?.clipsToBounds = true
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 85
     }
 }
 
