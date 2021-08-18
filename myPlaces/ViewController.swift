@@ -8,13 +8,14 @@
 import UIKit
 
 class ViewController: UIViewController, UITableViewDelegate,UITableViewDataSource {
- 
-    let restaurantNames = [
-        "Burger Heroes", "Kitchen", "Bonsai", "Дастархан",
-        "Индокитай", "X.O", "Балкан Гриль", "Sherlock Holmes",
-        "Speak Easy", "Morris Pub", "Вкусные истории",
-        "Классик", "Love&Life", "Шок", "Бочка"
-    ]
+//
+//    let restaurantNames = [
+//        "Burger Heroes", "Kitchen", "Bonsai", "Дастархан",
+//        "Индокитай", "X.O", "Балкан Гриль", "Sherlock Holmes",
+//        "Speak Easy", "Morris Pub", "Вкусные истории",
+//        "Классик", "Love&Life", "Шок", "Бочка"
+//    ]
+    let places = Place.getPlaces()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,20 +23,20 @@ class ViewController: UIViewController, UITableViewDelegate,UITableViewDataSourc
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return restaurantNames.count
+        return places.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! CustomTableViewCell
-        cell.nameLabel.text = restaurantNames[indexPath.row]
+        cell.nameLabel.text = places[indexPath.row].name
         cell.imageCell.layer.cornerRadius = cell.imageCell.frame.height/2
-        cell.imageCell.image = UIImage(named: restaurantNames[indexPath.row])
+        cell.imageCell.image = UIImage(named: places[indexPath.row].name)
         cell.imageCell.clipsToBounds = true
+        cell.location.text = places[indexPath.row].location
+        cell.typeLabel.text = places[indexPath.row].type
         return cell
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 85
-    }
+    @IBAction func cancelAction(_ segue: UIStoryboardSegue) {}
 }
 
