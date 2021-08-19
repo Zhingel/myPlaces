@@ -72,6 +72,7 @@
                                             <outlet property="location" destination="oZC-AI-I7o" id="zmM-0H-lLA"/>
                                             <outlet property="nameLabel" destination="XaD-Ji-bdy" id="IoT-TE-SW6"/>
                                             <outlet property="typeLabel" destination="frV-Zc-MqF" id="6vt-UI-CsQ"/>
+                                            <segue destination="CUD-jc-uD4" kind="show" identifier="showDetail" id="3Lk-g5-hDL"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -97,6 +98,9 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="tableView" destination="fH2-d4-iUr" id="BcQ-Nc-0ZH"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
@@ -107,8 +111,8 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="aze-Ve-o2I" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="ZGh-RE-v3w">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="ZGh-RE-v3w">
+                        <rect key="frame" x="0.0" y="44" width="414" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <textAttributes key="titleTextAttributes">
                             <fontDescription key="fontDescription" name="SnellRoundhand" family="Snell Roundhand" pointSize="24"/>
@@ -271,13 +275,21 @@
                     <navigationItem key="navigationItem" title="new Place " id="wQm-cH-67L">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="Y6V-8v-R5X">
                             <connections>
-                                <segue destination="j67-II-weo" kind="unwind" unwindAction="cancelAction:" id="vX2-1V-9ys"/>
+                                <action selector="cancelAction:" destination="CUD-jc-uD4" id="xbg-5y-NRA"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="I2H-qD-Uuz"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="I2H-qD-Uuz">
+                            <connections>
+                                <segue destination="j67-II-weo" kind="unwind" unwindAction="unwindSegue:" id="9Qr-Rz-sWa"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="imageLabel" destination="zBP-xn-MRu" id="Irs-eG-bHu"/>
+                        <outlet property="nameTextField" destination="flV-dM-LnJ" id="8uD-0l-3Wl"/>
+                        <outlet property="placeTextField" destination="tam-lg-7Qr" id="Hdu-bI-2kd"/>
+                        <outlet property="saveButton" destination="I2H-qD-Uuz" id="ixi-TI-xrb"/>
+                        <outlet property="typeTextField" destination="VjQ-Lg-Mih" id="Ugb-dx-srm"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="k9t-em-Qpg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -301,9 +313,12 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bbg-Ts-awx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1815.9420289855075" y="75.669642857142847"/>
+            <point key="canvasLocation" x="2726" y="-820"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="nEq-sd-pSD"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="Photo" width="195" height="196"/>
         <systemColor name="systemBackgroundColor">
