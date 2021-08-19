@@ -3,6 +3,7 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -17,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="85" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="fH2-d4-iUr">
-                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
+                                <rect key="frame" x="0.0" y="120" width="414" height="742"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" id="kse-4j-xs6" customClass="CustomTableViewCell" customModule="myPlaces" customModuleProvider="target">
@@ -81,17 +82,36 @@
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="VBx-Fp-rh8"/>
                                 </connections>
                             </tableView>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="xhV-Bt-GvF">
+                                <rect key="frame" x="0.0" y="88" width="414" height="32"/>
+                                <segments>
+                                    <segment title="Date"/>
+                                    <segment title="Name"/>
+                                </segments>
+                                <color key="selectedSegmentTintColor" name="AccentColor"/>
+                                <connections>
+                                    <action selector="sortSelection:" destination="BYZ-38-t0r" eventType="valueChanged" id="pN2-4g-BED"/>
+                                </connections>
+                            </segmentedControl>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="fH2-d4-iUr" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="Aqr-W0-5Os"/>
+                            <constraint firstItem="fH2-d4-iUr" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="32" id="Aqr-W0-5Os"/>
+                            <constraint firstItem="xhV-Bt-GvF" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="ERR-wC-zN6"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="fH2-d4-iUr" secondAttribute="bottom" id="LLa-0X-RrQ"/>
+                            <constraint firstItem="xhV-Bt-GvF" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="aYl-rF-pgG"/>
                             <constraint firstItem="fH2-d4-iUr" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="fAj-no-QJZ"/>
                             <constraint firstItem="fH2-d4-iUr" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="kzv-HR-ojM"/>
+                            <constraint firstItem="xhV-Bt-GvF" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="ykS-kO-ouk"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="My Places" id="04E-5d-XRY">
+                    <navigationItem key="navigationItem" title="My Places" largeTitleDisplayMode="never" id="04E-5d-XRY">
+                        <barButtonItem key="leftBarButtonItem" title="Item" image="AZ" id="gqh-Ka-0Fl">
+                            <connections>
+                                <action selector="reverseSorting:" destination="BYZ-38-t0r" id="BtT-Wn-IDl"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="ECl-Pn-SnJ">
                             <connections>
                                 <segue destination="7Gd-p9-8vq" kind="presentation" modalTransitionStyle="crossDissolve" id="hRc-zt-S6r"/>
@@ -99,6 +119,8 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="reverseSortingButton" destination="gqh-Ka-0Fl" id="1Ww-1c-gpB"/>
+                        <outlet property="segmentedControl" destination="xhV-Bt-GvF" id="hNS-ab-Ymr"/>
                         <outlet property="tableView" destination="fH2-d4-iUr" id="BcQ-Nc-0ZH"/>
                     </connections>
                 </viewController>
@@ -132,7 +154,7 @@
             <objects>
                 <tableViewController id="CUD-jc-uD4" customClass="TableViewController" customModule="myPlaces" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="hjj-y5-Rm2">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <inset key="separatorInset" minX="16" minY="0.0" maxX="16" maxY="0.0"/>
@@ -317,10 +339,14 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="nEq-sd-pSD"/>
+        <segue reference="3Lk-g5-hDL"/>
     </inferredMetricsTieBreakers>
     <resources>
+        <image name="AZ" width="25" height="24"/>
         <image name="Photo" width="195" height="196"/>
+        <namedColor name="AccentColor">
+            <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

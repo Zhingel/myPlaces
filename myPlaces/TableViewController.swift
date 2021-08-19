@@ -58,7 +58,7 @@ class TableViewController: UITableViewController {
         if imageIsChanged {
             image = imageLabel.image
         } else {
-            image = #imageLiteral(resourceName: "photo1")
+            image = #imageLiteral(resourceName: "imagePlaceholder")
         }
         let imageData = image?.pngData()
         let newPlace = Place(name: nameTextField.text!, location: placeTextField.text!, type: typeTextField.text!, imageData: imageData)
